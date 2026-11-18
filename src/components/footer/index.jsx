@@ -1,15 +1,17 @@
+import { Link } from "react-router-dom";
+import { AUTHOR } from "../../modules/about";
 import PixelIcon from "../pixelIcon";
 import "./index.css";
 
-const CONTACT_EMAIL = "shortcutlearnpiano@gmail.com";
-
 const Footer = () => (
   <footer className="footer">
-    <a href={`mailto:${CONTACT_EMAIL}`} className="footer__mail">
+    <a href={`mailto:${AUTHOR.email}`} className="footer__mail">
       <PixelIcon name="mail" size={28} />
-      {CONTACT_EMAIL}
+      {AUTHOR.email}
     </a>
-    <span className="footer__credits">© Shortcut Piano · Insert coin to continue</span>
+    <span className="footer__credits">
+      Made by <Link to="/about">{AUTHOR.name}</Link> · Insert coin to continue
+    </span>
   </footer>
 );
 

@@ -243,6 +243,23 @@ const ICONS = {
     ],
     colors: { Y: "var(--yellow)", W: "var(--ink)", G: "var(--muted)", g: "var(--muted-2)" },
   },
+  avatar: {
+    rows: [
+      "...HHHHHH...",
+      "..HHHHHHHH..",
+      ".HHHSSSSHHH.",
+      ".HHSSSSSSHH.",
+      ".HSESSSSESH.",
+      ".HSSSSSSSSH.",
+      ".HSSSMMSSSH.",
+      ".HHSSSSSSHH.",
+      ".HH.SSSS.HH.",
+      "...CCCCCC...",
+      "..CCCCCCCC..",
+      ".CCCCCCCCCC.",
+    ],
+    colors: { H: "#3a2140", S: "#f2c29b", E: "var(--line)", M: "var(--pink)", C: "var(--cyan)" },
+  },
   heart: {
     rows: [
       ".RR...RR.",

@@ -1,5 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import "./styles/base.css";
+import About from "./pages/about";
 import { ChessMenu, ChessPlay } from "./pages/chess";
 import Compositions from "./pages/compositions";
 import Instruction from "./pages/instruction";
@@ -21,6 +22,7 @@ function App() {
         <Route path="/typing" element={<Typing />} />
         <Route path="/chess" element={<ChessMenu />} />
         <Route path="/chess/:openingId" element={<ChessPlay />} />
+        <Route path="/about" element={<About />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>

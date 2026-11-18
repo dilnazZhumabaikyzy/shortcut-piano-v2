@@ -27,3 +27,5 @@
   font-size: 1.2rem;
   color: var(--muted-2);
 }
+.footer__credits a { color: var(--muted); text-decoration: underline; }
+.footer__credits a:hover { color: var(--ink); }

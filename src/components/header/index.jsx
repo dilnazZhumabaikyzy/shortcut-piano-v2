@@ -9,6 +9,7 @@ const Header = () => {
     { to: "/shortcuts", label: "Shortcuts", also: ["/compositions", "/instruction", "/play"] },
     { to: "/typing", label: "Fast typing" },
     { to: "/chess", label: "Chess" },
+    { to: "/about", label: "About" },
   ];
   const isActive = (link) =>
     pathname.startsWith(link.to) || (link.also ?? []).some((prefix) => pathname.startsWith(prefix));

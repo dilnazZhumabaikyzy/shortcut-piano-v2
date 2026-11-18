@@ -48,7 +48,7 @@ const CATEGORIES = [
 ];
 
 function summaryLine({ stars, maxStars }) {
-  return stars ? `★ ${stars}/${maxStars}` : "Not played yet";
+  return stars ? `Stars ${stars}/${maxStars}` : "Not played yet";
 }
 
 const Main = () => {
