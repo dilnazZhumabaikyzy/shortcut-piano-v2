@@ -1,0 +1,105 @@
+.play__keyboard {
+  display: flex;
+  justify-content: center;
+  margin-top: 28px;
+}
+
+/* ---------- dialog box ---------- */
+
+.infoblock {
+  padding: 22px 28px 20px;
+  transition: background-color 120ms steps(2);
+}
+
+.infoblock.is-correct {
+  background: var(--green-dark);
+}
+
+.infoblock.is-wrong {
+  background: var(--red-dark);
+  animation: px-shake 150ms steps(2) 2;
+}
+
+.infoblock__label {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.infoblock__label::before {
+  content: "♪ ";
+  color: var(--pink);
+}
+
+.infoblock__body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 24px;
+  min-height: 80px;
+  margin-bottom: 16px;
+}
+
+.infoblock__description {
+  flex: 1 1 320px;
+  font-size: clamp(1.6rem, 2.6vw, 2.4rem);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+/* hover to reveal: the streak is reset while it's shown */
+.infoblock__hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 200px;
+  min-height: 64px;
+  padding: 8px 12px;
+  cursor: help;
+  background: var(--bg-2);
+  box-shadow: inset var(--px) var(--px) 0 0 var(--line);
+}
+
+.infoblock__hint-label {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  color: var(--yellow);
+}
+
+/* "+10", "Try again!" pop-up */
+.infoblock__comment {
+  position: absolute;
+  top: -28px;
+  right: 24px;
+  z-index: 2;
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2.2vw, 1.6rem);
+  color: var(--green);
+  text-shadow: var(--px) var(--px) 0 var(--line);
+  pointer-events: none;
+  animation: comment-rise 600ms steps(6) forwards;
+}
+
+.infoblock__comment.is-wrong {
+  color: var(--red);
+}
+
+@keyframes comment-rise {
+  0% {
+    transform: translateY(16px) scale(0.8);
+    opacity: 1;
+  }
+  30% {
+    transform: translateY(-8px) scale(1.1);
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-24px);
+    opacity: 0;
+  }
+}

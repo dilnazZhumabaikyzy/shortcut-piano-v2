@@ -1,0 +1,85 @@
+.typing-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.typing-controls__group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.typing-controls__group .px-label {
+  margin: 0 8px 0 0;
+}
+
+.typing-text {
+  padding: 24px 32px;
+}
+
+.typing-text.is-wrong {
+  background: var(--red-dark);
+  animation: px-shake 150ms steps(2) 2;
+}
+
+.typing-text__label {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+.typing-text__scroll {
+  max-height: 25vh;
+  overflow-y: auto;
+  margin-bottom: 20px;
+}
+
+.typing-text p {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  line-height: 1.25;
+}
+
+.typing-char {
+  color: var(--muted-2);
+  white-space: pre-wrap;
+}
+
+.typing-char.is-typed {
+  color: var(--ink);
+}
+
+/* typed correctly after a mistake */
+.typing-char.is-fixed {
+  color: var(--orange);
+}
+
+/* block cursor */
+.typing-char.is-current {
+  color: var(--line);
+  background: var(--yellow);
+  box-shadow: 0 var(--px) 0 var(--yellow-dark);
+  animation: cursor-blink 1s steps(1) infinite;
+}
+
+@keyframes cursor-blink {
+  50% {
+    background: transparent;
+    color: var(--yellow);
+    box-shadow: 0 var(--px) 0 var(--yellow);
+  }
+}
+
+.typing__keyboard {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}

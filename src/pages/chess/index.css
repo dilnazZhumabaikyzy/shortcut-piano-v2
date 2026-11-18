@@ -1,0 +1,214 @@
+.chess-intro {
+  max-width: 70ch;
+  margin: -12px 0 28px;
+  font-size: 1.3rem;
+  color: var(--muted);
+}
+
+.chess-intro b {
+  color: var(--yellow);
+  font-weight: 600;
+}
+
+.chess-side {
+  font-family: var(--font-display);
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+
+/* ---------- game layout ---------- */
+
+.chess {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 28px;
+}
+
+/* ---------- board ---------- */
+
+.board {
+  --sq: clamp(36px, min(6.4vw, 8.4vh), 68px);
+  flex: none;
+  padding: 14px;
+}
+
+.board__grid {
+  display: grid;
+  grid-template-columns: repeat(8, var(--sq));
+  grid-template-rows: repeat(8, var(--sq));
+  box-shadow: 0 0 0 var(--px) var(--line);
+}
+
+.board__square {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #d8c8ff;
+}
+
+.board__square.is-dark {
+  background: var(--muted-2);
+}
+
+.board__square.is-last {
+  background: #ffe48a;
+}
+
+.board__square.is-dark.is-last {
+  background: var(--yellow-dark);
+}
+
+.board__piece {
+  width: 78%;
+  height: auto;
+  filter: drop-shadow(2px 3px 0 rgba(7, 3, 15, 0.45));
+}
+
+.board__square.is-last .board__piece {
+  animation: px-bob 300ms steps(2) 1;
+}
+
+.board__rank,
+.board__file {
+  position: absolute;
+  font-family: var(--font-display);
+  font-size: 0.45rem;
+  color: var(--panel);
+  pointer-events: none;
+}
+
+.board__square.is-dark .board__rank,
+.board__square.is-dark .board__file {
+  color: #d8c8ff;
+}
+
+.board__rank {
+  top: 3px;
+  left: 3px;
+}
+
+.board__file {
+  bottom: 3px;
+  right: 3px;
+}
+
+/* ---------- side panel ---------- */
+
+.chess-panel {
+  flex: 1 1 340px;
+  padding: 22px 26px 22px;
+  transition: background-color 120ms steps(2);
+}
+
+.chess-panel.is-correct {
+  background: var(--green-dark);
+}
+
+.chess-panel.is-wrong {
+  background: var(--red-dark);
+  animation: px-shake 150ms steps(2) 2;
+}
+
+.chess-panel__description {
+  margin: 0 0 18px;
+  font-size: 1.25rem;
+  line-height: 1.25;
+  color: var(--muted);
+}
+
+.chess-input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 72px;
+  padding: 8px 18px;
+  font-family: var(--font-mono);
+  font-size: 3rem;
+  line-height: 1;
+  background: var(--bg);
+  box-shadow: inset var(--px) var(--px) 0 0 var(--line), 0 0 0 var(--px) var(--cyan);
+}
+
+.chess-input.is-waiting {
+  box-shadow: inset var(--px) var(--px) 0 0 var(--line), 0 0 0 var(--px) var(--panel-3);
+  opacity: 0.7;
+}
+
+.chess-input__prompt {
+  color: var(--pink);
+}
+
+.chess-input__text {
+  color: var(--ink);
+}
+
+.chess-input__cursor {
+  color: var(--yellow);
+  font-size: 2.4rem;
+}
+
+.chess-panel__help {
+  margin: 10px 0 18px;
+  font-family: var(--font-display);
+  font-size: 0.5rem;
+  color: var(--muted-2);
+  text-transform: uppercase;
+}
+
+.chess-panel__row {
+  display: flex;
+  margin-bottom: 18px;
+}
+
+/* ---------- move list ---------- */
+
+.moves {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  margin: 0 0 18px;
+  padding: 12px 14px;
+  list-style: none;
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  background: var(--bg-2);
+  box-shadow: inset var(--px) var(--px) 0 0 var(--line);
+}
+
+.moves__item {
+  color: var(--muted-2);
+}
+
+.moves__item.is-played {
+  color: var(--ink);
+}
+
+.moves__item.is-next {
+  color: var(--yellow);
+}
+
+.moves__number {
+  margin-right: 4px;
+  color: var(--pink);
+}
+
+/* "+10", "Not the book move" pop-up */
+.chess-panel__comment {
+  position: absolute;
+  top: -26px;
+  right: 20px;
+  z-index: 2;
+  font-family: var(--font-display);
+  font-size: clamp(0.8rem, 1.6vw, 1.2rem);
+  color: var(--green);
+  text-shadow: var(--px) var(--px) 0 var(--line);
+  pointer-events: none;
+  animation: comment-rise 700ms steps(6) forwards;
+}
+
+.chess-panel__comment.is-wrong {
+  color: var(--red);
+}

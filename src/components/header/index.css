@@ -1,0 +1,57 @@
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 0 24px;
+}
+
+.header__brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.header__brand:hover .pixel-icon {
+  animation: px-bob 400ms steps(2) infinite;
+}
+
+.header__title {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--ink);
+  text-shadow: 3px 3px 0 var(--pink-dark);
+}
+
+.header__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}
+
+.header__link {
+  position: relative;
+  padding: 8px 0 8px 20px;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.header__link:hover {
+  color: var(--ink);
+}
+
+/* "▶" menu cursor on the current page */
+.header__link.active {
+  color: var(--yellow);
+}
+
+.header__link.active::before {
+  content: "▶";
+  position: absolute;
+  left: 0;
+  animation: px-blink 1s steps(1) infinite;
+}

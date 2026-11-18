@@ -1,0 +1,503 @@
+/* ============================================================
+   Shortcut Piano — pixel design system
+   Tokens, base typography and shared pixel primitives.
+   ============================================================ */
+
+:root {
+  /* palette */
+  --bg: #140c2b;
+  --bg-2: #1f1342;
+  --panel: #2a1a57;
+  --panel-2: #36236e;
+  --panel-3: #4a3490;
+  --line: #07030f;
+  --ink: #fff4e0;
+  --muted: #b9a8e8;
+  --muted-2: #7d68c2;
+  --pink: #ff4d8d;
+  --pink-dark: #b8245c;
+  --cyan: #3ee6ff;
+  --cyan-dark: #1a8fb3;
+  --yellow: #ffd23f;
+  --yellow-dark: #c08a00;
+  --orange: #ff8a3d;
+  --green: #4dff88;
+  --green-dark: #1d9e4c;
+  --red: #ff4d4d;
+  --red-dark: #a8262b;
+
+  /* type */
+  --font-display: "Press Start 2P", monospace;
+  --font-body: "Pixelify Sans", "VT323", monospace;
+  --font-mono: "VT323", monospace;
+
+  /* pixel unit: every border, shadow and step is a multiple of it */
+  --px: 4px;
+}
+
+/* ---------- reset & base ---------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.25rem;
+  line-height: 1.4;
+  background-color: var(--bg);
+  /* faint pixel grid */
+  background-image: linear-gradient(rgba(255, 255, 255, 0.035) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 2px, transparent 2px),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+  background-size: 32px 32px, 32px 32px, 100% 100%;
+  background-attachment: fixed;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* CRT scanlines over everything, purely decorative */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1000;
+  background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.12) 0 1px, transparent 1px 3px);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.5;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img,
+svg {
+  image-rendering: pixelated;
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+::selection {
+  background: var(--pink);
+  color: var(--ink);
+}
+
+.page {
+  width: min(1180px, 100% - 32px);
+  margin: 0 auto;
+  padding-bottom: 48px;
+}
+
+.text-shadow {
+  text-shadow: var(--px) var(--px) 0 var(--line);
+}
+
+/* ---------- panel: box with notched pixel corners ---------- */
+
+.px-panel {
+  position: relative;
+  background: var(--panel);
+  margin: var(--px);
+  box-shadow:
+    /* outline: four offset shadows leave the corners notched */
+    calc(var(--px) * -1) 0 0 0 var(--line),
+    var(--px) 0 0 0 var(--line),
+    0 calc(var(--px) * -1) 0 0 var(--line),
+    0 var(--px) 0 0 var(--line),
+    /* bevel */
+    inset var(--px) var(--px) 0 0 var(--panel-3),
+    inset calc(var(--px) * -1) calc(var(--px) * -1) 0 0 var(--bg-2);
+}
+
+.px-panel--light {
+  background: var(--panel-2);
+}
+
+/* ---------- buttons ---------- */
+
+.px-btn {
+  --btn: var(--pink);
+  --btn-dark: var(--pink-dark);
+  --btn-ink: var(--ink);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: var(--px);
+  padding: 14px 20px 18px;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--btn-ink);
+  background: var(--btn);
+  box-shadow: calc(var(--px) * -1) 0 0 0 var(--line), var(--px) 0 0 0 var(--line),
+    0 calc(var(--px) * -1) 0 0 var(--line), 0 var(--px) 0 0 var(--line),
+    inset 0 calc(var(--px) * -1) 0 0 var(--btn-dark), inset var(--px) var(--px) 0 0 rgba(255, 255, 255, 0.35);
+  transition: transform 60ms steps(1);
+}
+
+.px-btn:hover {
+  filter: brightness(1.12);
+}
+
+.px-btn:active {
+  transform: translateY(var(--px));
+  box-shadow: calc(var(--px) * -1) 0 0 0 var(--line), var(--px) 0 0 0 var(--line),
+    0 calc(var(--px) * -1) 0 0 var(--line), 0 var(--px) 0 0 var(--line), inset var(--px) var(--px) 0 0 var(--btn-dark);
+  padding: 16px 20px;
+}
+
+.px-btn:focus-visible {
+  outline: var(--px) dashed var(--yellow);
+  outline-offset: 6px;
+}
+
+.px-btn--cyan {
+  --btn: var(--cyan);
+  --btn-dark: var(--cyan-dark);
+  --btn-ink: var(--line);
+}
+
+.px-btn--yellow {
+  --btn: var(--yellow);
+  --btn-dark: var(--yellow-dark);
+  --btn-ink: var(--line);
+}
+
+.px-btn--green {
+  --btn: var(--green);
+  --btn-dark: var(--green-dark);
+  --btn-ink: var(--line);
+}
+
+.px-btn--ghost {
+  --btn: var(--panel-2);
+  --btn-dark: var(--bg-2);
+}
+
+.px-btn--small {
+  font-size: 0.625rem;
+  padding: 10px 14px 14px;
+}
+
+.px-btn--small:active {
+  padding: 12px 14px;
+}
+
+.px-btn--active {
+  --btn: var(--yellow);
+  --btn-dark: var(--yellow-dark);
+  --btn-ink: var(--line);
+}
+
+.px-btn:disabled {
+  cursor: not-allowed;
+  filter: grayscale(0.8) brightness(0.8);
+  transform: none;
+}
+
+/* ---------- inputs ---------- */
+
+.px-input {
+  display: block;
+  width: 100%;
+  padding: 10px 14px;
+  border: none;
+  font-family: var(--font-mono);
+  font-size: 1.6rem;
+  background: var(--bg);
+  color: var(--ink);
+  box-shadow: inset var(--px) var(--px) 0 0 var(--line), 0 0 0 var(--px) var(--panel-3);
+}
+
+.px-input::placeholder {
+  color: var(--muted-2);
+}
+
+.px-input:focus {
+  outline: none;
+  box-shadow: inset var(--px) var(--px) 0 0 var(--line), 0 0 0 var(--px) var(--cyan);
+}
+
+.px-label {
+  display: block;
+  margin-bottom: 10px;
+  font-family: var(--font-display);
+  font-size: 0.625rem;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+/* ---------- keycap (used on instruction cards and hints) ---------- */
+
+.px-keycap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+  padding: 0 10px 4px;
+  margin: var(--px);
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  color: var(--line);
+  background: var(--ink);
+  box-shadow: calc(var(--px) * -1) 0 0 0 var(--line), var(--px) 0 0 0 var(--line),
+    0 calc(var(--px) * -1) 0 0 var(--line), 0 var(--px) 0 0 var(--line), inset 0 calc(var(--px) * -1) 0 0 var(--muted);
+}
+
+.px-keys {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+}
+
+.px-keys__plus {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+/* ---------- segmented progress bar ---------- */
+
+.px-progress {
+  height: 20px;
+  padding: var(--px);
+  background: var(--line);
+}
+
+.px-progress__fill {
+  height: 100%;
+  background-color: var(--green);
+  /* segments */
+  background-image: repeating-linear-gradient(90deg, transparent 0 12px, var(--line) 12px 16px);
+  transition: width 120ms steps(3);
+}
+
+/* ---------- modal ---------- */
+
+.px-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(7, 3, 15, 0.75);
+  animation: px-fade 200ms steps(4);
+}
+
+.px-modal__box {
+  width: min(560px, 100%);
+  padding: 40px 32px 32px;
+  text-align: center;
+  animation: px-pop 240ms steps(4);
+}
+
+.px-modal__box h1 {
+  font-size: 1.25rem;
+  color: var(--yellow);
+  margin: 20px 0 16px;
+}
+
+.px-modal__box h2 {
+  font-family: var(--font-mono);
+  font-size: 2rem;
+  margin-bottom: 24px;
+}
+
+.px-modal__actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* ---------- animations ---------- */
+
+@keyframes px-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes px-pop {
+  from {
+    transform: scale(0.6);
+  }
+}
+
+@keyframes px-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes px-bob {
+  50% {
+    transform: translateY(calc(var(--px) * -2));
+  }
+}
+
+@keyframes px-shake {
+  25% {
+    transform: translateX(calc(var(--px) * -2));
+  }
+  75% {
+    transform: translateX(calc(var(--px) * 2));
+  }
+}
+
+.blink {
+  animation: px-blink 1s steps(1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ---------- HUD (score line above a game) ---------- */
+
+.hud {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px 32px;
+  margin-bottom: 20px;
+}
+
+.hud__title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--cyan);
+  text-shadow: var(--px) var(--px) 0 var(--line);
+}
+
+.hud__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 36px;
+}
+
+.hud__stat {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.hud__stat span {
+  font-family: var(--font-display);
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.hud__stat strong {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.1rem;
+  text-shadow: 3px 3px 0 var(--line);
+}
+
+.hud__value--yellow {
+  color: var(--yellow);
+}
+
+.hud__value--pink {
+  color: var(--pink);
+}
+
+.hud__value--green {
+  color: var(--green);
+}
+
+/* ---------- section page heading ---------- */
+
+.section-head {
+  margin: 8px 0 36px;
+}
+
+.section-head__eyebrow {
+  margin: 0 0 14px;
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+
+.section-head__title {
+  font-size: clamp(1.4rem, 3.6vw, 2.4rem);
+  color: var(--yellow);
+}
+
+.section-head__lead {
+  max-width: 60ch;
+  margin: 18px 0 0;
+  font-size: 1.4rem;
+  color: var(--muted);
+}
+
+/* ---------- stars ---------- */
+
+.stars {
+  display: inline-flex;
+  gap: 6px;
+}
+
+.stars .pixel-icon {
+  filter: drop-shadow(2px 2px 0 var(--line));
+}
+
+/* "New best!" badge on result screens */
+.record-badge {
+  display: inline-block;
+  margin: -8px 0 20px;
+  padding: 8px 12px;
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  color: var(--line);
+  background: var(--green);
+  animation: px-blink 0.8s steps(1) 3;
+}
+
+.px-modal__box .stars {
+  display: flex;
+  justify-content: center;
+  margin: -4px 0 16px;
+}
