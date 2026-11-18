@@ -10,7 +10,8 @@ import Typing from "./pages/typing";
 
 function App() {
   return (
-    <BrowserRouter>
+    // PUBLIC_URL is the sub-path on GitHub Pages ("/shortcut-piano-v2"), empty in development.
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/shortcuts" element={<Shortcuts />} />
